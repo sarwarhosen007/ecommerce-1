@@ -1,0 +1,34 @@
+body{
+  background-color: rgb(247, 247, 247) !important;
+  font-family: 'Lato', sans-serif !important;
+}
+
+.app{
+}
+
+.hover-pointer:hover{
+  cursor: pointer;
+}
+
+.theme-text{
+  color: #008d71 !important;
+}
+
+.bg-theme{
+  background: #008d71 !important;
+}
+
+.btn-theme{
+  background: #008d71 !important;
+  color: white !important;
+  font-weight: 800 !important;
+}
+
+.sidebar-container{
+  max-height: 600px;
+  overflow: scroll;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  width: 4px;
+}

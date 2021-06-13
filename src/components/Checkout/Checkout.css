@@ -1,0 +1,230 @@
+
+
+.order-summary-container{
+    position: sticky;
+    top: 5rem;
+    
+}
+
+.summary-item{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.voucher-input{
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding-right: 5px;
+    border-radius: 6px;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    border: 1px solid rgb(237, 237, 237);
+}
+
+.voucher-input input{
+    height: 100%;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    font-size: calc(14px);
+    color: rgb(119, 121, 140);
+    border: none;
+    border-radius: 0px;
+    padding: 0px 20px;
+    background-color: transparent;
+    margin-right: 0px;
+    display: block;
+    width: 100%;
+    appearance: none;
+    font-family: Lato, sans-serif;
+    transition: all 0.25s ease 0s;
+}
+
+.voucher-input button{
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 158, 127);
+    transition: all 0.3s ease 0s;
+    border-radius: 6px;
+    appearance: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    height: 38px;
+    text-decoration: none;
+    font-family: inherit;
+    border: 0px;
+    padding: 0px 30px;
+}
+
+.voucher-input button:hover{
+    background: rgb(24, 116, 97) !important;
+    color: white !important;
+}
+
+
+
+.checkout .radio-group label {
+    width: 100%;
+}
+
+.checkout .radio-group .card-input-element {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.checkout .radio-group .card-input {
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgb(247, 247, 247);
+    min-height: 100px;
+}
+
+.checkout .radio-group .card-input:hover {
+    cursor: pointer;
+}
+
+.checkout .radio-group .card-input-element:checked + .card-input {
+     box-shadow: 0 0 1px 1px rgb(0, 158, 127);
+     background: white;
+}
+
+.card-input .panel-heading{
+    font-family: Lato, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(13, 17, 54);
+    line-height: 1.2;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.order-btn{
+    padding: 0px 30px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 158, 127);
+    transition: all 0.3s ease 0s;
+    border-radius: 6px;
+    appearance: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    border: 0px;
+    height: 48px;
+    width: 100%;
+}
+
+.order-btn:hover{
+    background: rgb(22, 145, 120);
+}
+
+.checkout-section{
+    background-color: rgb(255, 255, 255);
+    padding: 30px 40px;
+    position: relative;
+    margin-bottom: 20px;
+    box-shadow: rgb(0 0 0 / 8%) 0px 2px 16px 0px;
+}
+
+.checkout-section h3.section-header::before{
+    counter-increment: section-counter 1;
+    content: counter(section-counter);
+    color: rgb(255, 255, 255);
+    font-size: 19px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: rgb(0, 158, 127);
+    margin-right: 15px;
+}
+
+body{
+    counter-reset: section-counter;
+}
+
+.section-header{
+    margin-left: -10px;
+    font-family: Lato, sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: rgb(13, 17, 54);
+    line-height: 1.2;
+    margin-bottom: 35px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.radio-group label.col-md-4{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.payment .order-btn:disabled{
+    background: lightgrey !important;
+}
+
+.payment .order-btn:disabled:hover{
+    cursor: unset;
+}
+
+.checkout-section-add-btn{
+    width: auto;
+    height: auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: transparent;
+    border: 0px;
+    outline: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    font-family: Lato, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(0, 158, 127);
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+
+.StripeElement{
+    margin: 20px 0;
+}
+
+@media (max-width: 991px){
+    .form-row{
+        flex-direction: column-reverse;
+    }
+}
