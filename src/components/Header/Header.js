@@ -6,8 +6,9 @@ import './Header.css';
 import LoginModal from '../LoginModal/LoginModal';
 import SignupModal from '../SignupModal/SignupModal';
 import ResetModal from '../ResetModal/ResetModal';
+import FilterDrawer from './FilterDrawer';
 
-const Header = () => {
+const Header = ({selectedCategory, changeCategory}) => {
 
     const [loginIsOpen,setLoginIsOpen] = useState(false);
     const [signupIsOpen, setSignupIsOpen] = useState(false);
@@ -41,7 +42,18 @@ const Header = () => {
         document.body.style.overflow = 'unset';
     }
 
+    const [isFilterDrawerOpen, setFilterDrawerOpen] = useState(false);
+    
+    const handleFilterDrawerOpen = () => {
+        setFilterDrawerOpen(true); 
+    }
+
+    const handleFilterDrawerClose = () => {
+        setFilterDrawerOpen(false);
+    }
+
     return (
+        <>
         <header className="bg-white">
             <div className ="container-fluid">
             <nav className="navbar navbar-expand-lg navbar-light pt-4 pb-4">
@@ -67,7 +79,25 @@ const Header = () => {
                 </nav>
             </div>
             
+            <hr style={{margin:0}}/>
+            <div className="filter-mobile-view bg-white shadow-sm">
+                <div className="p-3 d-flex justify-content-between">
+                    {
+                        selectedCategory? 
+                        <div className="mobile-view-selected-category">{selectedCategory}</div> 
+                        :<div style={{fontWeight:700}}>No Category Selected</div>
+                    }
+                    
+                    <div className="mobile-view-filter-text" onClick={handleFilterDrawerOpen}>
+                        Filter
+                    </div>
+                </div>
+            </div>
+            <FilterDrawer changeCategory={changeCategory} isFilterDrawerOpen={isFilterDrawerOpen} handleFilterDrawerClose={handleFilterDrawerClose}></FilterDrawer>
+            
         </header>
+        
+        </>
     );
 };
 

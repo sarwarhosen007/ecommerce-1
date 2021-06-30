@@ -17,14 +17,19 @@ const OrderReceived = () => {
     
     let totalPrice = 0;
     for(let i = 0; i < items.length; i++){
-        totalPrice += items[i].price*items[i].count;
+        if(items[i].discount > 0){
+            totalPrice += items[i].sale*items[i].count;
+        }
+        else{
+            totalPrice += items[i].price*items[i].count;
+        }
     }
 
     return (
         <>
             <Header></Header>
 
-            <div className="order-received container">
+            <div className="order-received container" style={{marginTop:'6rem'}}>
                 <div className="row">
                     <div className="col-md-9 mx-auto mt-5 mb-5 bg-white rounded">
                         <div className="btn-container mt-3 text-right">

@@ -20,13 +20,17 @@ const Cart = () => {
     const items = useSelector(state => {
         return state.items.cartItems;
     })
-    console.log(items)
 
     const [cartExpanded, setCartExpanded] = useState(false);
     
     let totalPrice = 0;
     for(let i = 0; i < items?.length; i++){
-        totalPrice += items[i].price*items[i].count;
+        if(items[i].discount > 0){
+            totalPrice += items[i].sale*items[i].count;
+        }
+        else{
+            totalPrice += items[i].price*items[i].count;
+        }
     }
 
     

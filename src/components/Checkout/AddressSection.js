@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { BiPlus } from "react-icons/bi";
+import addresses from '../../data/adresse';
 import AddAddressModal from './AddAddressModal';
-
-const addresses = [
-    {
-        title: "Home",
-        desc: "27 Street, 2569 Heritage Road Visalia, CA 93291"
-    },
-    {
-        title: "Office",
-        desc: "33 Baker Street, Crescent Road, CA 65746"
-    },
-]
 
 const AddressSection = ({register,errors}) => {
 

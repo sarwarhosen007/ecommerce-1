@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 
 
@@ -10,14 +11,14 @@ export function useProductDrawer(){
 
 export function ProductDrawerProvider({children}){
     const [isProductDrawerOpen, setProductDrawerOpen] = useState(false);
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState()
     
     const handleProductDrawerOpen = (pd) => {
         if(pd){
             setProduct(pd)
         }
         else{
-            setProduct(null)
+            setProduct()
         }
         setProductDrawerOpen(true);
     }
