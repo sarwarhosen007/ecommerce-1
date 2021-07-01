@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { useProductDrawer } from '../../../../contexts/ProductDrawerContext';
 import AdminProductDrawer from './AdminProductDrawer';
 
 const AdminProductItem = ({product}) => {
@@ -14,9 +13,9 @@ const AdminProductItem = ({product}) => {
 
     const handleProductDrawerClose = () => {
         setProductDrawerOpen(false);
-        console.log(isProductDrawerOpen)
     }
     return (
+        <>
         <div className="admin-product-item col-lg-3 col-md-4 col-sm-6 col-12 mt-3 mb-2 hover-pointer" onClick={() => handleProductDrawerOpen(product)}>
             <div className="card border-0">
                 <div className="admin-product-item-img-container">
@@ -43,8 +42,9 @@ const AdminProductItem = ({product}) => {
                     <p className="card-text">{product.name}</p>
                 </div>
             </div>
-            <AdminProductDrawer setProductDrawerOpen={setProductDrawerOpen} product={product} isProductDrawerOpen={isProductDrawerOpen} handleProductDrawerClose={handleProductDrawerClose}></AdminProductDrawer>
         </div>
+        <AdminProductDrawer product={product} isProductDrawerOpen={isProductDrawerOpen} handleProductDrawerClose={handleProductDrawerClose}></AdminProductDrawer>
+        </>
     );
 };
 
