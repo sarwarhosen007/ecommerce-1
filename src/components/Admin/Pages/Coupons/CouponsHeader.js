@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { BiPlus } from "react-icons/bi";
 import CouponDrawer from './CouponDrawer';
 
-const CouponsHeader = () => {
+const CouponsHeader = ({couponFilter}) => {
 
     const [isCouponDrawerOpen, setCouponDrawerOpen] = useState(false);
     
@@ -18,12 +18,13 @@ const CouponsHeader = () => {
     return (
         <>
             <div className="row header-content-row">
-                <div className="header-title col-lg-2">Category</div>
+                <div className="header-title col-lg-2">Coupon</div>
                 <div className="col-lg-10">
                     <div className ="row">
                         <div className="form-group col-lg-3">
-                            <select id="category" defaultValue="" className="form-control">
+                            <select id="category" onChange={couponFilter} defaultValue="" className="form-control">
                                 <option value="" disabled>Status</option>
+                                <option value="all">All</option>
                                 <option value="active">Active</option>
                                 <option value="revoked">Revoked</option>
                             </select>

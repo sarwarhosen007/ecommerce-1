@@ -15,7 +15,7 @@ const categories =[
         name: "Meat & Fish",
         img: <GiMeat size={40}></GiMeat>,
         slug: 'meat-fish',
-        type: 'Make Up'
+        type: 'Meat'
     },
     {
         id:3,
@@ -29,14 +29,14 @@ const categories =[
         name: "Pet Care",
         img: <BiBone size={40}></BiBone>,
         slug: 'petcare',
-        type: 'Grocery'
+        type: 'Pet'
     },
     {
         id:5,
         name: "Home & Cleaning",
         img: <BiHome size={40}></BiHome>,
         slug: 'home-cleaning',
-        type: 'Grocery'
+        type: 'Home'
     },
     {
         id:6,
@@ -64,14 +64,14 @@ const categories =[
         name: "Beverage",
         img: <BiDrink size={40}></BiDrink>,
         slug: 'beverage',
-        type: 'Grocery'
+        type: 'Drinks'
     },
     {
         id:10,
         name: "Beauty & Health",
         img: <GiMirrorMirror size={40}></GiMirrorMirror>,
         slug: 'beauty-health',
-        type: 'Grocery'
+        type: 'Make Up'
     }
 ]
 
