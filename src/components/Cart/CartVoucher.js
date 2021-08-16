@@ -3,16 +3,33 @@ import { useCoupon } from '../../contexts/CouponContext';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useItem } from '../../contexts/ItemContext';
 
-const CartVoucher = () => {
+const CartVoucher = ({totalPrice}) => {
     const [show, setShow] = useState(false);
-    const items = useSelector(state => state.items.cartItems)
+    const {allproducts} = useItem()
+
+    const cartItems = useSelector(state => {
+        return state.items.cartItems;
+    })
+
+    const items = allproducts.filter(pd => {
+        let exists = cartItems.find(cartPd => {
+            if(pd.id === cartPd.id){
+                pd.count = cartPd.count
+                return pd
+            }
+            else 
+                return null
+        })
+        return exists? true : false
+    })
     
     const {removeCoupon, setAppliedCoupon, appliedCoupon, error, couponHandler} = useCoupon()
     const handleCoupon = (e) => {
         e.preventDefault()
         let userCode = document.getElementById('code').value.toLowerCase()
-        couponHandler(userCode)
+        couponHandler(userCode,totalPrice)
     }
 
     const couponRemove = () => {

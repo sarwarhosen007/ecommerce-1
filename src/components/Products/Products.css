@@ -17,8 +17,8 @@
 
 .product-item .product-img-container .product-item-discount, .admin-product-item .admin-item-discount{
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 7px;
+    right: 10px;
     background-color: rgb(0, 158, 127);
     color: rgb(255, 255, 255);
     overflow: hidden;
@@ -62,8 +62,22 @@
     line-height: 1;
 }
 
+.slick-item img {
+    height: 50px;
+    width: 50px;
+}
+
+.slick-item{
+    min-height: 150px;
+}
+
+.slick-item p{
+    min-height: 50px;
+}
+
 @media (min-width:991px){
     .product-item .product-img-container {
         height: 250px;
     }
+    
 }

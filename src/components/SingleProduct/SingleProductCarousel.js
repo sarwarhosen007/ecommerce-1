@@ -9,8 +9,6 @@ const CustomDot = ({ product, onClick, ...rest  }) => {
       active,
     } = rest;
 
-    
-    
     return (
       <li className={"hover-pointer "+(active ? "active" : "inactive")} onClick={() => onClick()} >
         <img src={product.img[index]} alt="" />
@@ -19,7 +17,7 @@ const CustomDot = ({ product, onClick, ...rest  }) => {
   };
 
 const SingleProductCarousel = ({product}) => {
-    const carouselItems = product.img;
+    const carouselItems = product?.img;
     const responsive = {
         desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
         mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
@@ -52,16 +50,16 @@ const SingleProductCarousel = ({product}) => {
                 >
                     {
                         carouselItems.map((item, index) => {
-                            return (
-                                
-                                    <img
-                                        key={index}
-                                        className="d-block" style={{margin:'0 auto'}}
-                                        src={item}
-                                        alt="First slide"
-                                    />
-                                
-                            )
+                          return (
+                              
+                            <img
+                                key={index}
+                                className="d-block" style={{margin:'0 auto'}}
+                                src={item}
+                                alt="First slide"
+                            />
+                              
+                          )
                         })
                     }
                 </Carousel>

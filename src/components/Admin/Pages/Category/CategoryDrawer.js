@@ -5,14 +5,18 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import './Category.css'
 import {useDropzone} from 'react-dropzone';
 import { useForm } from "react-hook-form";
+import { useItem } from '../../../../contexts/ItemContext';
 
 const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClose}) => {
 
     const { register, handleSubmit, reset } = useForm();
+    const {setCategoryLoading, setCategoryChange} = useItem();
 
     const [files, setFiles] = useState([])
+    const [categoryImage, setImage] = useState([])
     const processDrop = (pics) =>{
-        setFiles(pics.map((file,index) => (
+        setFiles(pics)
+        setImage(pics.map((file,index) => (
             <img key={index} src={URL.createObjectURL(file)} alt="preview" />
         )))
     }
@@ -23,14 +27,68 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
         maxFiles:1,
     });
 
+    const saveToDatabase = (data) =>{
+        let apiURL = ""
+        if(!category){
+            apiURL = 'https://pickbazar-clone.herokuapp.com/addCategory'
+        }
+        else{
+            apiURL = 'https://pickbazar-clone.herokuapp.com/updateCategory/'+category.id
+        }
+        fetch(apiURL, {
+            method: category? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data){
+                reset()
+                setCategoryChange(true)
+                setCategoryChange(false)
+            }
+            setCategoryLoading(false)
+        })
+        .catch(error => {
+            setCategoryLoading(false)
+            alert(error.message)
+        })
+    }
+
     const onSubmit = data => {
-        data.img =  files.length > 0? files: category.img 
-        console.log(data)
-        reset()
-        handleCategoryDrawerClose()
+        setCategoryLoading(true)
+        if(files.length > 0){
+            const imageData = new FormData();
+            imageData.set('key', '0c9c52f3c2c70e376333024c7dd177e2');
+            imageData.append('image', files[0]);
+            fetch('https://api.imgbb.com/1/upload', {
+                method: 'POST',
+                body: imageData
+            })
+            .then(response => response.json())
+            .then(result => {
+                data.img = result.data.display_url
+                saveToDatabase(data)
+            })
+            .catch(error => {
+                alert(error)
+            })
+            closeDrawer()
+        } 
+        else if(category?.img){
+            saveToDatabase(data)
+            closeDrawer()
+        }
+        else{
+            setCategoryLoading(false)
+            alert("Please upload an image")
+        }
     }
 
     const closeDrawer = () => {
+        setImage([])
         setFiles([])
         reset()
         handleCategoryDrawerClose();
@@ -74,18 +132,18 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
                                     <p className="dropzone-label"><span>Drag/Upload your</span> image here</p>
                                 </div>
                                     {
-                                        category?.img.length > 0 && files.length === 0 &&
+                                        category && files.length === 0 &&
                                         <div className="dropzone-img-container">
-                                            {   
-                                                category?.img.map((pic,index) => <img key={index} src={pic} alt="preview" />)
+                                            {  
+                                                <img className="p-2" src={category.img} alt="" />
                                             }
                                             
                                         </div>
                                     }
                                     {
-                                        files.length > 0 && 
+                                        categoryImage.length > 0 && 
                                         <div className="dropzone-img-container">
-                                            {files}
+                                            {categoryImage}
                                         </div>
                                     }
                                     {
@@ -101,28 +159,23 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
                                 <p className="drawer-body-section-title">Add your Category description and necessary information from here</p>
                             </div>
                             <div className="col-lg-8 bg-white product-info">
-                                
-                                {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-                                    <div className="form-group">
-                                        <label htmlFor="categoryName">Name</label>
-                                        <input type="text" className="form-control" {...register("categoryName")} name="categoryName" id="categoryName" aria-describedby="categoryName" defaultValue={category?category.name:""} required/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="categorySlug">Slug</label>
-                                        <input type="text" className="form-control" {...register("categorySlug")} name="categorySlug" id="categorySlug" defaultValue={category?category.slug:""}  required/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="categoryParent">Parent</label>
-                                        <select type="text" className="form-control" {...register("categoryParent")} name="categoryParent" id="categoryParent" defaultValue={category?category.type:""} aria-describedby="categoryParent" required>
-                                            <option value="Grocery">Grocery</option>
-                                            <option value="Make Up">Make Up</option>
-                                            <option value="Home">Home</option>
-                                            <option value="Meat">Meat</option>
-                                        </select>
-                                    </div>
-                                    
-                                    {/* <button type="submit" className="btn btn-primary">Submit</button> */}
-                                {/* </form> */}
+                                <div className="form-group">
+                                    <label htmlFor="name">Name</label>
+                                    <input type="text" className="form-control" {...register("name")} name="name" id="name" aria-describedby="name" defaultValue={category?category.name:""} required/>
+                                </div>
+                                {/* <div className="form-group">
+                                    <label htmlFor="categorySlug">Slug</label>
+                                    <input type="text" className="form-control" {...register("categorySlug")} name="categorySlug" id="categorySlug" defaultValue={category?category.slug:""}  required/>
+                                </div> */}
+                                <div className="form-group">
+                                    <label htmlFor="type">Parent</label>
+                                    <select type="text" className="form-control" {...register("type")} name="type" id="type" defaultValue={category?category.type:""} aria-describedby="type" required>
+                                        <option value="Grocery">Grocery</option>
+                                        <option value="Make Up">Make Up</option>
+                                        <option value="Home">Home</option>
+                                        <option value="Meat">Meat</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         

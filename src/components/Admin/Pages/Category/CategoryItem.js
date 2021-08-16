@@ -5,7 +5,7 @@ import CategoryDrawer from './CategoryDrawer.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const CategoryItem = ({category, categories, isAllChecked, setSelected, deselectAll, selected}) => {
+const CategoryItem = ({category, index, categories, isAllChecked, setSelected, deselectAll, selected, handleSingleDelete}) => {
 
     const [isCategoryDrawerOpen, setCategoryDrawerOpen] = useState(false);
 
@@ -15,10 +15,6 @@ const CategoryItem = ({category, categories, isAllChecked, setSelected, deselect
 
     const handleCategoryDrawerClose = () => {
         setCategoryDrawerOpen(false);
-    }
-
-    const handleCategoryDelete = () => {
-
     }
 
     const [isChecked, setIsChecked] = useState(isAllChecked);
@@ -53,14 +49,14 @@ const CategoryItem = ({category, categories, isAllChecked, setSelected, deselect
                 <td>
                     <input type="checkbox" className="mt-2 ml-2" checked={isChecked} onChange={changeCheck} name="category-item" value={category}/>
                 </td>
-                <th scope="row">{category.id}</th>
-                <td>{category.img}</td>
+                <th scope="row">{index+1}</th>
+                <td><img src={category.img} alt="" /></td>
                 <td>{category.name}</td>
-                <td>{category.slug}</td>
+                {/* <td>{category.slug}</td> */}
                 <td>{category.type}</td>
                 <td>
                     <BiEdit color="green" onClick={()=> handleCategoryDrawerOpen(category)} className="mr-2 hover-pointer"></BiEdit>
-                    <BsTrash color='red' onClick={() => handleCategoryDelete(category)} className="hover-pointer"></BsTrash>
+                    <BsTrash color='red' onClick={() => handleSingleDelete(category.id)} className="hover-pointer"></BsTrash>
                 </td>
             </tr>
             <CategoryDrawer category={category} isCategoryDrawerOpen={isCategoryDrawerOpen} handleCategoryDrawerClose={handleCategoryDrawerClose}></CategoryDrawer>

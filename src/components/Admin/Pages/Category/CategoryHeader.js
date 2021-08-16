@@ -4,7 +4,7 @@ import { BiPlus } from "react-icons/bi";
 import { useState } from 'react';
 import CategoryDrawer from './CategoryDrawer';
 
-const CategoryHeader = ({categoryFilter}) => {
+const CategoryHeader = ({typeFilter, setTypeFilter, categoryFilter, handleSearch}) => {
 
     const [isCategoryDrawerOpen, setCategoryDrawerOpen] = useState(false);
 
@@ -16,6 +16,11 @@ const CategoryHeader = ({categoryFilter}) => {
         setCategoryDrawerOpen(false);
     }
 
+    const handleFilter = (e) => {
+        setTypeFilter(e.target.value)
+        categoryFilter(e.target.value, true)
+    }
+
     return (
         <>
             <div className="row header-content-row">
@@ -23,7 +28,7 @@ const CategoryHeader = ({categoryFilter}) => {
                 <div className="col-lg-10">
                     <div className ="row">
                         <div className="form-group col-lg-3">
-                            <select id="category" defaultValue="" onChange={categoryFilter} className="form-control">
+                            <select id="category" value={typeFilter} onChange={handleFilter} className="form-control">
                                 <option value="" disabled>Category Type</option>
                                 <option value="all">All</option>
                                 <option value="Grocery">Grocery</option>
@@ -34,7 +39,7 @@ const CategoryHeader = ({categoryFilter}) => {
                             </select>
                         </div>
                         <div className="form-group col-lg-6">
-                            <input type="text" id="search" className="form-control" placeholder="Ex: Search By Name"/>
+                            <input type="text" id="search" onKeyUp={handleSearch} className="form-control" placeholder="Ex: Search By Name"/>
                         </div>
                         <div className="col-lg-3">
                             <div className="add-category-btn" onClick={()=>handleCategoryDrawerOpen("add")}>
