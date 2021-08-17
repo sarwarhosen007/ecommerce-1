@@ -1,19 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
 
-const OrderHeader = ({orderFilter}) => {
-
-    const [limit, setLimit] = useState('all')
-    const [status, setStatus] = useState('all')
+const OrderHeader = ({orderFilter, handleSearch, limitFilter, setLimitFilter, statusFilter, setStatusFilter}) => {
 
     const handleLimitFilter = (e) => {
-        setLimit(e.target.value)
-        orderFilter(status, e.target.value)
+        setLimitFilter(e.target.value)
+        orderFilter(statusFilter, e.target.value, true)
     }
 
     const handleStatusFilter = (e) => {
-        setStatus(e.target.value)
-        orderFilter(e.target.value, limit)
+        setStatusFilter(e.target.value)
+        orderFilter(e.target.value, limitFilter, true)
     }
 
     return (
@@ -22,7 +18,7 @@ const OrderHeader = ({orderFilter}) => {
             <div className="col-lg-10">
                 <div className ="row">
                     <div className="form-group col-lg-3">
-                        <select id="filterStatus" defaultValue="" onChange={handleStatusFilter} className="form-control">
+                        <select id="filterStatus" value={statusFilter} onChange={handleStatusFilter} className="form-control">
                             <option value="" disabled >Status</option>
                             <option value="all">All</option>
                             <option value="delivered">Delivered</option>
@@ -32,7 +28,7 @@ const OrderHeader = ({orderFilter}) => {
                         </select>
                     </div>
                     <div className="form-group col-lg-3">
-                        <select id="orderLimits" defaultValue="" onChange={handleLimitFilter} className="form-control">
+                        <select id="orderLimits" value={limitFilter} onChange={handleLimitFilter} className="form-control">
                             <option value="" disabled>Order Limits</option>
                             <option value="all">All</option>
                             <option value="2">Last 7 orders</option>
@@ -41,7 +37,7 @@ const OrderHeader = ({orderFilter}) => {
                         </select>
                     </div>
                     <div className="form-group col-lg-6">
-                        <input type="text" id="search" className="form-control" placeholder="Ex: Search By Address"/>
+                        <input type="text" id="search" onKeyUp={handleSearch} className="form-control" placeholder="Ex: Search By Address"/>
                     </div>
                 </div>
             </div>

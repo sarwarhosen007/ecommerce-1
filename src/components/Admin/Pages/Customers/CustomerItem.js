@@ -1,16 +1,28 @@
 import React from 'react';
+import user from '../../../../img/user.png'
 
-const CustomerItem = ({customer}) => {
+const CustomerItem = ({customer, index}) => {
+
+    let identity = ""
+    if(customer.name)
+        identity = customer.name
+    else if(customer.email)
+        identity = customer.email
+    else
+        identity = customer.uid
+
     return (
-        <tr>
-            <th scope="row">{customer.id}</th>
-            <td><img src={customer.img} alt="" /></td>
-            <td>{customer.name}</td>
-            <td>{customer.contact}</td>
-            <td>{customer.totalOrders}</td>
-            <td>${customer.totalAmount}</td>
-            <td>{customer.joining}</td>
-        </tr>
+        <>
+            <tr>
+                <th scope="row">{index+1}</th>
+                <td><img src={customer.photo?customer.photo:user} alt="" /></td>
+                <td>{identity}</td>
+                <td>{customer.contactNumber?customer.contactNumber[0].desc:""}</td>
+                <td>{customer.orders}</td>
+                <td>${customer.totalAmount.toFixed(2)}</td>
+                <td>{customer.joiningDate}</td>
+            </tr>
+        </>
     );
 };
 

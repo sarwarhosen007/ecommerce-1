@@ -9,7 +9,11 @@ const ProductItem = ({product}) => {
         <div className="product-item mt-4">
             <div className="card shadow-sm">
                 <div className="product-img-container">
-                    <img className="card-img-top" src={product.img[0]} alt="" onClick={() => history.push('/product/'+product.id)} />
+                    {
+                        product.quantity === 0 &&
+                        <span className="stockout-container">Out of stock</span>
+                    }
+                    <img className="card-img-top" src={product?.img[0]} alt="" onClick={() => history.push('/product/'+product.id)} />
                     {
                         product.discount > 0 &&
                         <p className="product-item-discount">{product.discount}%</p>
@@ -17,7 +21,7 @@ const ProductItem = ({product}) => {
                 </div>
                 <div className="card-body">
                     {
-                        product.discount > 0 &&
+                        product.sale > 0 &&
                         <>
                             <h5 className="card-title">${product.sale}</h5> 
                             <span className="discount-price">${product.price}</span>
@@ -25,7 +29,7 @@ const ProductItem = ({product}) => {
                         </>
                     }
                     {
-                        product.discount === 0 &&
+                        product.sale === 0 &&
                         <h5 className="card-title">${product.price}</h5>
                     }
                     <p className="card-text">{product.name}</p>

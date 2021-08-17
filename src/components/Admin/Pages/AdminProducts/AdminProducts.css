@@ -21,7 +21,9 @@
     color: rgb(22, 31, 106);
 }
 
-
+.admin-product-item-img-container .card-img-top{
+    height: 300px;
+}
 
 .admin-products-header{
     background: white;
@@ -84,6 +86,8 @@ select.form-control, select.form-control option, .drawer select.form-control, .d
 .item-select{
     height: 20px;
     width: 20px;
+    position: absolute;
+    z-index: 1;
 }
 
 @media (max-width: 991px){
